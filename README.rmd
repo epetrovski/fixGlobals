@@ -65,7 +65,7 @@ In the example below, `data.table` is used to refer to several columns in mtcars
 ```{r eval=FALSE, include=TRUE}
 subset_cars <- function(mtcars) {
   dtcars <- as.data.table(mtcars)
-  dtcars[, .(cyl, mpg, disp, hp, drat, carb)] # <-- Her gøres der brug af NSE
+  dtcars[, .(cyl, mpg, disp, hp, drat, carb)]
 }
 ```
 

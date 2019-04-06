@@ -70,7 +70,7 @@ in mtcars.
 ``` r
 subset_cars <- function(mtcars) {
   dtcars <- as.data.table(mtcars)
-  dtcars[, .(cyl, mpg, disp, hp, drat, carb)] # <-- Her gøres der brug af NSE
+  dtcars[, .(cyl, mpg, disp, hp, drat, carb)]
 }
 ```
 
