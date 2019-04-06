@@ -6,7 +6,7 @@ global variable” due to the use of Non Standard Evaluation (NSE) to
 refer to columns in a data frame like R object. Data transformation
 packages like `data.table` and `dplyr` use NSE.
 
-`daFixGlobals` maintains the input to the function
+`fixGlobals` maintains the input to the function
 `utils::globalVariables()` located in “R/zzz\_global\_variables.R”.
 `utils::globalVariables()` ensures that R CMD check notes do not occur
 for objects it has been provided the name of.
@@ -14,7 +14,7 @@ for objects it has been provided the name of.
 ## Initiate zzz\_global\_variables.R
 
 If the file “R/zzz\_global\_variables.R” does not already exist, it can
-be created with `daFixGlobals::initiate_file()`. By default, the content
+be created with `fixGlobals::initiate_file()`. By default, the content
 of zzz\_global\_variables.R looks like
 this:
 
@@ -61,10 +61,10 @@ fix_undefined_global_vars()
 ```
 
 However, it’s cumbersome to maintain the character vector manually if
-one makes extensive use of NSE. In
-stead,`daFixGlobals::add_globalVars()` is used to automatically add
-variable names to the vector. In the example below, `data.table` is used
-to refer to several columns in mtcars.
+one makes extensive use of NSE. In stead,`fixGlobals::add_globalVars()`
+is used to automatically add variable names to the vector. In the
+example below, `data.table` is used to refer to several columns in
+mtcars.
 
 ``` r
 subset_cars <- function(mtcars) {
@@ -77,7 +77,7 @@ In this example R CMD check notes will be provided for `mpg, disp, hp,
 drat, carb`, if we choose to run `devtools::check()`. No note is
 provided for `cyl` since this variable was provided manually to
 `globalVariables()` earlier — see example above. However, if
-`daFixGlobals::add_globalVars()` is run zzz\_global\_variables.R will be
+`fixGlobals::add_globalVars()` is run zzz\_global\_variables.R will be
 updated:
 
 ``` r
@@ -94,5 +94,5 @@ fix_undefined_global_vars <- function() {
 fix_undefined_global_vars()
 ```
 
-Notice that `daFixGlobals` also keeps order by sorting alphabetically
-and maintains no more that fire variables in every line.
+Notice that `fixGlobals` also keeps order by sorting alphabetically and
+maintains no more that fire variables in every line.
