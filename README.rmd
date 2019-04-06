@@ -1,16 +1,11 @@
 ---
-title: "README"
-author: "Erik Petrovski"
-date: "1/4/2019"
-output: 
- md_document:
-    variant: markdown_github
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# fixGlobals <img src="man/figures/logo.png" align ="right", height="180">
+# fixGlobals <img src="man/figures/logo.png" align ="right" height="180" />
 
 A helper tool to avoid R CMD check notes for "no visible binding for global variable" due to the use of Non Standard Evaluation (NSE) to refer to columns in a data frame like R object. Data transformation packages like `data.table` and `dplyr` use NSE.
 

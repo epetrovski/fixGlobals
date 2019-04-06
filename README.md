@@ -1,5 +1,5 @@
-fixGlobals &lt;img src=“man/figures/logo.png” align =“right”, height=“180”&gt;
-==============================================================================
+
+# fixGlobals <img src="man/figures/logo.png" align ="right" height="180" />
 
 A helper tool to avoid R CMD check notes for “no visible binding for
 global variable” due to the use of Non Standard Evaluation (NSE) to
@@ -11,12 +11,12 @@ packages like `data.table` and `dplyr` use NSE.
 `utils::globalVariables()` ensures that R CMD check notes do not occur
 for objects it has been provided the name of.
 
-Initiate zzz\_global\_variables.R
----------------------------------
+## Initiate zzz\_global\_variables.R
 
 If the file “R/zzz\_global\_variables.R” does not already exist, it can
 be created with `daFixGlobals::initiate_file()`. By default, the content
-of zzz\_global\_variables.R looks like this:
+of zzz\_global\_variables.R looks like
+this:
 
 ``` r
 #' A fix to avoid R CMD check notes for \"no visible binding for global variable\"
@@ -41,8 +41,7 @@ fix_undefined_global_vars <- function() {
 fix_undefined_global_vars()
 ```
 
-Add variables
--------------
+## Add variables
 
 It’s possible to maintain the character vector in globalVariables()
 manually. Below the column `cyl` from mtcars is added and the
@@ -74,9 +73,9 @@ subset_cars <- function(mtcars) {
 }
 ```
 
-In this example R CMD check notes will be provided for
-`mpg, disp, hp, drat, carb`, if we choose to run `devtools::check()`. No
-note is provided for `cyl` since this variable was provided manually to
+In this example R CMD check notes will be provided for `mpg, disp, hp,
+drat, carb`, if we choose to run `devtools::check()`. No note is
+provided for `cyl` since this variable was provided manually to
 `globalVariables()` earlier — see example above. However, if
 `daFixGlobals::add_globalVars()` is run zzz\_global\_variables.R will be
 updated:
