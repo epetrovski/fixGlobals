@@ -62,9 +62,10 @@ fix_undefined_global_vars()
 
 However, it’s cumbersome to maintain the character vector manually if
 one makes extensive use of NSE. In stead,`fixGlobals::add_globalVars()`
-is used to automatically add variable names to the vector. In the
-example below, `data.table` is used to refer to several columns in
-mtcars.
+is used to automatically add variable names to the vector.
+
+In the example below, `data.table` is used to refer to several columns
+in mtcars.
 
 ``` r
 subset_cars <- function(mtcars) {
@@ -74,11 +75,10 @@ subset_cars <- function(mtcars) {
 ```
 
 In this example R CMD check notes will be provided for `mpg, disp, hp,
-drat, carb`, if we choose to run `devtools::check()`. No note is
-provided for `cyl` since this variable was provided manually to
-`globalVariables()` earlier — see example above. However, if
-`fixGlobals::add_globalVars()` is run zzz\_global\_variables.R will be
-updated:
+drat, carb` if `devtools::check()` is executed. No note is provided for
+`cyl` since this variable was provided manually to `globalVariables()`
+earlier — see example above. However, if `fixGlobals::add_globalVars()`
+is executed zzz\_global\_variables.R will be updated:
 
 ``` r
 fix_undefined_global_vars <- function() {
@@ -95,4 +95,4 @@ fix_undefined_global_vars()
 ```
 
 Notice that `fixGlobals` also keeps order by sorting alphabetically and
-maintains no more that fire variables in every line.
+puts no more that four variables in a line.
