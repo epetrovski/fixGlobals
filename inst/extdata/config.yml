@@ -1,0 +1,6 @@
+default:
+  r_version: 3.4.3
+  package_type: tool
+  isapi: no
+  isbatch: no
+  loglevel: info

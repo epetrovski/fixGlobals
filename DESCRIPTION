@@ -1,0 +1,20 @@
+Package: fixGlobals
+Title: Fix for CMD check notes "no visible binding for global variable"
+Version: 0.1.0
+Authors@R: 
+    person(given = "Erik",
+           family = "Petrovski",
+           role = c("aut", "cre"),
+           email = "erik@petrovski.dk")
+Description: Fix for CMD check notes "no visible binding for global variable".
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    stringi,
+    codetools,
+    utils,
+    rprojroot
+Suggests:
+    testthat
+RoxygenNote: 6.1.1
