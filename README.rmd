@@ -9,11 +9,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 A helper tool for package developers to avoid R CMD check notes concerning "no visible binding for global variable" which occur when a function refers to a variable that isn't defined in the global environment.
 
-These notes exist for good obvious reason but can become a nuisance when using data transformation packages like `data.table` and `dplyr` which make use of Non Standard Evaluation (NSE) to refer to columns in a data frame like R object. Every use of NSE creates an R CMD check note.
+These notes exist for obvious good reason but can become a nuisance when using data transformation packages like `data.table` and `dplyr` which make use of Non Standard Evaluation (NSE) to refer to columns in a data frame like R object. Every use of NSE creates an R CMD check note.
 
 `fixGlobals` works by maintaining a character vector of variable names to ignore during the R CMD check. This vector is passed to the function `utils::globalVariables()` which is located in "R/zzz_global_variables.R" - a script created with `fixGlobals`.
 
-## Initiate zzz_global_variables.R
+### Initiate zzz_global_variables.R
 
 First the file "R/zzz_global_variables.R" must be initiated with `fixGlobals::initiate_file()`. This is the default content of "zzz_global_variables.R":
 
@@ -42,9 +42,9 @@ fix_undefined_global_vars()
 
 ```
 
-## Add variables
+### Add variables
 
-It's possible to maintain the character vector in globalVariables() manually. Below the column `cyl` from mtcars is added and the placeholders `foo_a, foo_b` are removed:
+It's possible to maintain the character vector in `globalVariables()` manually. Below the column `cyl` from mtcars is added and the placeholders `foo_a, foo_b` are removed:
 
 ```{r eval=FALSE, include=TRUE}
 fix_undefined_global_vars <- function() {
@@ -60,7 +60,7 @@ fix_undefined_global_vars()
 
 ```
 
-However, this becomes cumbersome NSE is used extensively. In stead,`fixGlobals::add_globalVars()` can be used to automatically add variable names to the vector. 
+However, this becomes cumbersome if NSE is used extensively. In stead,`fixGlobals::add_globalVars()` can be used to automatically add variable names to the vector. 
 
 For instance, a function `subset_cars()` can be defined to use `data.table` to subset several columns from `mtcars`:
 
@@ -89,3 +89,12 @@ fix_undefined_global_vars()
 ```
 
 Notice that `fixGlobals` also keeps order by sorting alphabetically and puts no more that four variables in a line.
+
+## Install
+
+You can install `fixGlobals` from GitHub.
+
+```{r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("epetrovski/fixGlobals")
+```

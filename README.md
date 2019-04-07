@@ -6,7 +6,7 @@ concerning “no visible binding for global variable” which occur when a
 function refers to a variable that isn’t defined in the global
 environment.
 
-These notes exist for good obvious reason but can become a nuisance when
+These notes exist for obvious good reason but can become a nuisance when
 using data transformation packages like `data.table` and `dplyr` which
 make use of Non Standard Evaluation (NSE) to refer to columns in a data
 frame like R object. Every use of NSE creates an R CMD check note.
@@ -16,7 +16,7 @@ to ignore during the R CMD check. This vector is passed to the function
 `utils::globalVariables()` which is located in
 “R/zzz\_global\_variables.R” - a script created with `fixGlobals`.
 
-## Initiate zzz\_global\_variables.R
+### Initiate zzz\_global\_variables.R
 
 First the file “R/zzz\_global\_variables.R” must be initiated with
 `fixGlobals::initiate_file()`. This is the default content of
@@ -45,9 +45,9 @@ fix_undefined_global_vars <- function() {
 fix_undefined_global_vars()
 ```
 
-## Add variables
+### Add variables
 
-It’s possible to maintain the character vector in globalVariables()
+It’s possible to maintain the character vector in `globalVariables()`
 manually. Below the column `cyl` from mtcars is added and the
 placeholders `foo_a, foo_b` are removed:
 
@@ -64,7 +64,7 @@ fix_undefined_global_vars <- function() {
 fix_undefined_global_vars()
 ```
 
-However, this becomes cumbersome NSE is used extensively. In
+However, this becomes cumbersome if NSE is used extensively. In
 stead,`fixGlobals::add_globalVars()` can be used to automatically add
 variable names to the vector.
 
@@ -101,3 +101,12 @@ fix_undefined_global_vars()
 
 Notice that `fixGlobals` also keeps order by sorting alphabetically and
 puts no more that four variables in a line.
+
+## Install
+
+You can install `fixGlobals` from GitHub.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("epetrovski/fixGlobals")
+```
