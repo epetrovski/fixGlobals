@@ -2,19 +2,22 @@
 # fixGlobals <img src="man/figures/logo.png" align ="right" height="180" />
 
 A helper tool for package developers to avoid R CMD check notes
-concerning “no visible binding for global variable” which occur when a
+concerning “no visible binding for global variable” that occur when a
 function refers to a variable that isn’t defined in the global
 environment.
 
 These notes exist for obvious good reason but can become a nuisance when
 using data transformation packages like `data.table` and `dplyr` which
 make use of Non Standard Evaluation (NSE) to refer to columns in a data
-frame like R object. Every use of NSE creates an R CMD check note.
+frame like R object. Every use of NSE creates an R CMD check note due to
+the fact that the R CMD check interprets unquoted variable names as
+global variables.
 
-`fixGlobals` works by maintaining a character vector of variable names
-to ignore during the R CMD check. This vector is passed to the function
-`utils::globalVariables()` which is located in
-“R/zzz\_global\_variables.R” - a script created with `fixGlobals`.
+`fixGlobals` works by maintaining a character vector of variable names,
+passed to `utils::globalVariables()`, and which are ignored during the R
+CMD check.
+
+## How to use
 
 ### Initiate zzz\_global\_variables.R
 
@@ -65,7 +68,7 @@ fix_undefined_global_vars()
 ```
 
 However, this becomes cumbersome if NSE is used extensively. In
-stead,`fixGlobals::add_globalVars()` can be used to automatically add
+stead,`fixGlobals::add_global_vars()` can be used to automatically add
 variable names to the vector.
 
 For instance, a function `subset_cars()` can be defined to use
@@ -81,7 +84,7 @@ subset_cars <- function(mtcars) {
 In this example R CMD check notes will be provided for `mpg, disp, hp,
 drat, carb` if `devtools::check()` is executed. No note is provided for
 `cyl` since this variable was provided manually to `globalVariables()`
-earlier — see example above. However, if `fixGlobals::add_globalVars()`
+earlier — see example above. However, if `fixGlobals::add_global_vars()`
 is executed zzz\_global\_variables.R will be updated and check notes
 concerning these variable are avoided:
 
