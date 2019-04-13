@@ -1,10 +1,16 @@
-#' Add missing variables to globalVariables()
+#' add_global_vars
+#'
+#' Adds missing variables to globalVariables().
 #'
 #' @export
 #'
 #' @importFrom utils capture.output
 #'
-add_globalVars <- function(){
+#' @examples
+#' \dontrun{
+#' initiate_file()
+#' }
+add_global_vars <- function(){
 
   # Find package name
   package_name <- find_package_name()
@@ -31,12 +37,14 @@ add_globalVars <- function(){
   # Create vector with variable names sans lines concerning functions
   new_vars <- paste0(new_vars[new_vars != "NO MATCH"])
 
-  # Wrtie to zzz_global_variables.R
+  # Write to zzz_global_variables.R
   append_file(new_vars, file_path)
 
 }
 
-#' Find variable names in the output of R CMD check
+#' get_varName
+#'
+#' Find svariable names in the output of R CMD check.
 #'
 #' @return A list of matches
 #'
@@ -45,17 +53,18 @@ add_globalVars <- function(){
 get_varName <- function(string){
 
   # REGEX to catch names of global variables
-  pattern <- ".*no visible binding for global variable ‘(.*)’.*"
+  pattern <- ".*no visible binding for global variable '(.*)'.*"
 
   # Return name if there's a global variabel, otherwise return "NO MATCH"
   ifelse(grepl(pattern, string), gsub(pattern, "\\1", string), "NO MATCH")
 }
 
-#' Read from and wrtie to zzz_global_variables.R
+#' append_file
+#'
+#' Reads from and wrties to zzz_global_variables.R.
 #'
 #' @param new_vars A vector with names of new variables to add
 #' @param file_path Path to zzz_global_variables.R
-#'
 append_file <- function(new_vars, file_path){
 
   # Connects to script
@@ -71,7 +80,6 @@ append_file <- function(new_vars, file_path){
   line_num <- which(file_content_strp == "globalVariables(")
 
   # All the text from the beginning of the globalVariables function to end of script
-  # TODO: A more sophisticated parser able to find ending parenthesis
   relevant_content <- paste(file_content_strp[line_num:length(file_content_strp)], collapse = "")
 
   # Get variable names of already defined variables
@@ -108,10 +116,16 @@ append_file <- function(new_vars, file_path){
     }
 }
 
-
-#' Creates a new zzz_global_variables.R
+#' initiate_file
+#'
+#' Creates a new zzz_global_variables.R file.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' initiate_file()
+#' }'
 #'
 initiate_file <- function() {
 
@@ -120,7 +134,7 @@ initiate_file <- function() {
 
   # Check if file already exists
   if (file.exists(file_path))
-     stop("zzz_global_variables already exists - will not overwrite.
+    stop("zzz_global_variables already exists - will not overwrite.
           Delete file manually to start over.")
 
   # Create file
@@ -148,15 +162,16 @@ fix_undefined_global_vars <- function() {
         )
       )
 }
-
 fix_undefined_global_vars()",
-             file_connection)
+file_connection)
 
   # Close connection
   close(file_connection)
 }
 
 #' find_package_name
+#'
+#' Finds the name of the package that the user is working on.
 #'
 #' @return Name of the package that user is in
 #'
