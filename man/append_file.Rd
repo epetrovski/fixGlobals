@@ -2,7 +2,7 @@
 % Please edit documentation in R/funcs.R
 \name{append_file}
 \alias{append_file}
-\title{Read from and wrtie to zzz_global_variables.R}
+\title{append_file}
 \usage{
 append_file(new_vars, file_path)
 }
@@ -12,5 +12,5 @@ append_file(new_vars, file_path)
 \item{file_path}{Path to zzz_global_variables.R}
 }
 \description{
-Read from and wrtie to zzz_global_variables.R
+Reads from and wrties to zzz_global_variables.R.
 }

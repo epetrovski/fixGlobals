@@ -10,5 +10,5 @@ find_package_name()
 Name of the package that user is in
 }
 \description{
-find_package_name
+Finds the name of the package that the user is working on.
 }

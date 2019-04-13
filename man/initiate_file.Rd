@@ -2,10 +2,10 @@
 % Please edit documentation in R/funcs.R
 \name{initiate_file}
 \alias{initiate_file}
-\title{Creates a new zzz_global_variables.R}
+\title{initiate_file}
 \usage{
 initiate_file()
 }
 \description{
-Creates a new zzz_global_variables.R
+Creates a new zzz_global_variables.R file.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/funcs.R
 \name{get_varName}
 \alias{get_varName}
-\title{Find variable names in the output of R CMD check}
+\title{get_varName}
 \usage{
 get_varName(string)
 }
@@ -13,5 +13,5 @@ get_varName(string)
 A list of matches
 }
 \description{
-Find variable names in the output of R CMD check
+Find svariable names in the output of R CMD check.
 }
