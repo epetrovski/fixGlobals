@@ -1,5 +1,5 @@
 Package: fixGlobals
-Title: Fix for CMD check notes "no visible binding for global variable"
+Title: Helper Tool for CMD Check Notes
 Version: 0.1.0
 Authors@R: 
     person(given = "Erik",
