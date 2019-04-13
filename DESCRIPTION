@@ -15,6 +15,4 @@ Imports:
     codetools,
     utils,
     rprojroot
-Suggests:
-    testthat
 RoxygenNote: 6.1.1
