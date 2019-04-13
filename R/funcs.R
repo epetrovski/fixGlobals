@@ -53,7 +53,7 @@ add_global_vars <- function(){
 get_varName <- function(string){
 
   # REGEX to catch names of global variables
-  pattern <- ".*no visible binding for global variable '(.*)'.*"
+  pattern <- ".*no visible binding for global variable \u2018(.*)\u2019.*"
 
   # Return name if there's a global variabel, otherwise return "NO MATCH"
   ifelse(grepl(pattern, string), gsub(pattern, "\\1", string), "NO MATCH")
